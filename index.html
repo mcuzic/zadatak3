@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Zadatak 3</title>
+    <meta name="description" content="Simple Swiper" />
+    <meta name="keywords" content="swiper" />
+    <meta name="author" content="MĆ" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+    <link rel="stylesheet" href="main.css" />
+  </head>
+  <body>
+    <!-- Slider main container -->
+    <div class="swiper">
+      <!-- Additional required wrapper -->
+      <div class="swiper-wrapper">
+        <!-- Slides -->
+        <div class="swiper-slide">
+          <img src="./img/Image3_1.jfif" class="swiper-slide-img" alt="slide-1" />
+        </div>
+        <div class="swiper-slide">
+          <img src="./img/Image3_2.jfif" class="swiper-slide-img" alt="slide-2" />
+        </div>
+        <div class="swiper-slide">
+          <img src="./img/Image3_3.jfif" class="swiper-slide-img" alt="slide-3" />
+        </div>
+        <div class="swiper-slide">
+          <img src="./img/Image3_1.jfif" class="swiper-slide-img" alt="slide-4" />
+        </div>
+      </div>
+
+      <!-- If we need navigation buttons -->
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+
+      <!-- toggleBtn -->
+      <button class="toggle-swiper active">Stop Swiper</button>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+  
+      let swiper = new Swiper('.swiper', {
+        slidesPerView:1.04,
+        spaceBetween: 8,
+        loop: true,
+        breakpoints:{
+          1440 :{
+              slidesPerView:3,
+          }
+        },
+        scrollbar: {
+          el: '.swiper-scrollbar',
+        },
+      });
+
+      //selectElements
+      const btnNext = document.querySelector('.swiper-button-next')
+      const btnPrev = document.querySelector('.swiper-button-prev')
+      const swiperWrapper= document.querySelector('.swiper-wrapper')
+      const toggleBtn = document.querySelector('.toggle-swiper')
+      const swiperContainer= document.querySelector('.swiper')
+
+      // Carousel Custom
+      class Carousel {
+        constructor (containerSelector){
+        this.container = document.querySelector(containerSelector);
+        this.prevBtn = this.container.querySelector('.swiper-button-prev');
+      this.nextBtn = this.container.querySelector('.swiper-button-next');
+      // bind
+      this.actions();
+      }
+      actions(){
+        this.prevBtn.addEventListener('click', ()=>this.prevSlide())
+        this.nextBtn.addEventListener('click', ()=>this.nextSlide())
+      }
+      nextSlide(){
+      swiper.slideNext();
+      }
+      prevSlide(){ 
+      swiper.slidePrev();
+      } 
+      }
+      const newCarousel= new Carousel('.swiper')
+
+      //activeSlide
+    const activeFunction = () => {
+      if (swiper) {
+      swiper.on('slideChangeTransitionEnd', () => {
+      console.log(`ActiveSlide: ${swiper.realIndex}`);
+    });
+  }};
+      //enable swiper
+      const enableSwiper = ()=>{
+        swiper=new Swiper('.swiper', {
+        slidesPerView:1.04,
+        spaceBetween: 6,
+        loop: true,
+        breakpoints:{
+          1440 :{
+              slidesPerView:3,
+          }
+        },
+        scrollbar: {
+          el: '.swiper-scrollbar',
+        },
+      });
+       swiperContainer.classList.remove('swiper-destroyed');
+       activeFunction();
+      }
+
+     //toggle - destroy and init
+     toggleBtn.addEventListener('click', ()=>{
+        if(swiper && toggleBtn.classList.contains('active') ) {
+          swiper.destroy( true, true );
+          toggleBtn.classList.remove('active')
+          toggleBtn.textContent='Initialize Swiper'
+          swiperContainer.classList.add('swiper-destroyed')
+      } else { 
+        toggleBtn.classList.add('active')
+        enableSwiper();
+        toggleBtn.textContent='Stop Swiper'
+      }
+     })
+    
+     //enable swiper
+     document.addEventListener('DOMContentLoaded', () => {enableSwiper()});
+     
+    </script>
+  </body>
+</html>

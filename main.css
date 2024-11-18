@@ -1,0 +1,35 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body {
+  background: #e3cfcf;
+}
+
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.swiper-slide-img {
+  width: 100%;
+}
+.swiper {
+  margin-top: 2rem;
+}
+/* destroy */
+.swiper-destroyed .swiper-wrapper {
+  display: flex;
+  gap: 8px;
+}
+
+.swiper-destroyed .swiper-slide {
+  max-width: 33.33%;
+}
+
+@media screen and (max-width: 1440px) {
+  .swiper-destroyed .swiper-slide {
+    max-width: 100%;
+  }
+}
